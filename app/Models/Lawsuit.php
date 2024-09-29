@@ -51,4 +51,15 @@ class Lawsuit extends Model
     {
         return $this->belongsTo(Client::class, 'defendant_id');
     }
+
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

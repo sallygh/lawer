@@ -22,4 +22,10 @@ class Client extends Model
         'back_id_image',
         'notes',
     ];
+
+
+    public function lawsuits()
+    {
+        return $this->hasMany(Lawsuit::class);
+    }
 }
