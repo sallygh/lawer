@@ -13,8 +13,8 @@ class CreateClientsTable extends Migration
             $table->string('full_name');
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
-            $table->unsignedBigInteger('front_id_image')->nullable();
-            $table->unsignedBigInteger('back_id_image')->nullable();
+            $table->string('front_id_image')->nullable();
+            $table->string('back_id_image')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
         });
