@@ -24,33 +24,31 @@
 
 <body>
     <div class="container form-container">
-        <h1 class="text-center my-4">إضافة قضية جديدة</h1>
+        <h1 class="text-center my-4">إضافة دعوى جديدة</h1>
         <form action="{{ route('lawsuits.store') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="type">النوع:</label>
-                <select id="type" name="type" class="form-control" required>
-                    <option value="مدني">مدني</option>
-                    <option value="شرعي">شرعي</option>
-                </select>
+                <div class="form-group">
+                    <label for="type">نوع الدعوى</label>
+                    <select id="type" name="type" class="form-control" required onchange="updateSubjects()">
+                        <option value="مدني">مدني</option>
+                        <option value="شرعي">شرعي</option>
+                        <option value="جزائي">جزائي</option>
+                        <option value="صلحي">صلحي</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject">موضوع الدعوى</label>
+                    <select id="subject" name="subject" class="form-control" required>
+                        <!-- الخيارات سيتم إضافتها بواسطة JavaScript -->
+                    </select>
+                </div>
+
+
             </div>
 
             <div class="form-group">
-                <label for="subject">الموضوع:</label>
-                <input type="text" id="subject" name="subject" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-                <label for="plaintiff_id">المدعي:</label>
-                <select id="plaintiff_id" name="plaintiff_id" class="form-control">
-                    @foreach ($clients as $client)
-                    <option value="{{ $client->id }}">{{ $client->full_name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="defendant_id">المدعى عليه:</label>
+                <label for="defendant_id"> اسم المدعى عليه </label>
                 <select id="defendant_id" name="defendant_id" class="form-control">
                     @foreach ($clients as $client)
                     <option value="{{ $client->id }}">{{ $client->full_name }}</option>
@@ -59,7 +57,7 @@
             </div>
 
             <div class="form-group">
-                <label for="status">الحالة:</label>
+                <label for="status"> حالة الدعوى </label>
                 <select id="status" name="status" class="form-control" required>
                     <option value="انتظار">انتظار</option>
                     <option value="تم التسجيل">تم التسجيل</option>
@@ -83,13 +81,40 @@
                 <input type="number" step="0.01" id="paid_amount" name="paid_amount" class="form-control">
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">إضافة قضية</button>
+            <button type="submit" class="btn btn-primary btn-block">إضافة دعوى</button>
         </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function updateSubjects() {
+            var type = document.getElementById("type").value;
+            var subject = document.getElementById("subject");
+
+            // إزالة جميع الخيارات الحالية
+            subject.innerHTML = "";
+
+            // إضافة الخيارات بناءً على نوع الدعوى
+            if (type === "مدني") {
+                var options = ["بيع شقة", "بيع سيارة"];
+            } else if (type === "شرعي") {
+                var options = ["طلاق", "زواج", "مخالعة", "تفريق"];
+            } else {
+                var options = [];
+            }
+
+            // إضافة الخيارات الجديدة إلى القائمة
+            for (var i = 0; i < options.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = options[i];
+                opt.innerHTML = options[i];
+                subject.appendChild(opt);
+            }
+        }
+    </script>
+
 </body>
 
 </html>

@@ -5,21 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع إدارة القضايا القانونية</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <!-- إضافة رابط Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- إضافة ملف CSS الخاص بك -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
     <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            direction: rtl;
-            text-align: right;
+        .button-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            /* مسافة بين الأزرار */
         }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <h1>موقع إدارة القضايا القانونية</h1>
-    </div>
+
     <div class="button-grid">
         <a href="{{ route('lawsuits.index') }}" class="btn btn-outline-primary">تصفح القضايا</a>
         <a href="{{ route('lawsuits.create') }}" class="btn btn-outline-secondary">إضافة قضية</a>
@@ -32,10 +40,6 @@
     <div class="content">
         @yield('content')
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

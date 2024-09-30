@@ -26,17 +26,17 @@ class LawsuitController extends Controller
         $lawsuit->save();
         return redirect()->route('lawsuits.index');
     }
-
-    public function edit(Lawsuit $lawsuit)
+    public function edit($id)
     {
-        $clients = Client::all();
-        return view('lawsuits.edit', compact('lawsuit', 'clients'));
+        $lawsuit = Lawsuit::findOrFail($id);
+        return view('lawsuits.edit', compact('lawsuit'));
     }
 
-    public function update(Request $request, Lawsuit $lawsuit)
+    public function update(Request $request, $id)
     {
+        $lawsuit = Lawsuit::findOrFail($id);
         $lawsuit->update($request->all());
-        return redirect()->route('lawsuits.index');
+        return redirect()->route('lawsuits.index')->with('success', 'تم تحديث القضية بنجاح');
     }
 
     public function destroy(Lawsuit $lawsuit)
